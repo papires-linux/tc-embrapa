@@ -1,0 +1,63 @@
+import jwt
+import datetime
+import os
+
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+
+from typing import Optional
+from dotenv import load_dotenv
+
+# Carregar variáveis de ambiente
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY", "chave_secreta")
+SECRET_USERNAME = os.getenv("SECRET_USERNAME", "admin")
+SECRET_PWD = os.getenv("SECRET_PWD", "1234")
+TIME_EXPIRES=30
+
+app = FastAPI()
+
+# Configuração do OAuth2
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+# Função para criar o token JWT
+def create_jwt_token(data: dict, expires_delta: Optional[int] = TIME_EXPIRES):
+    print(f"Cria um token JWT válido por {TIME_EXPIRES} minutos")
+    to_encode = data.copy()
+    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=expires_delta)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
+
+# Rota para gerar o token JWT
+@app.post("/token")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    username = form_data.username
+    password = form_data.password
+
+    print("entrou")
+    if username == SECRET_USERNAME and password == SECRET_PWD:
+        token = create_jwt_token({"sub": username})
+        return {"access_token": token, "token_type": "bearer"}
+
+    raise HTTPException(status_code=400, detail="Usuário ou senha incorretos")
+
+# Função para verificar o token
+def verify_token(token: str = Depends(oauth2_scheme)):
+    """Decodifica e verifica o token JWT"""
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token expirado")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Token inválido")
+
+# Rota protegida
+@app.get("/dados-protegidos")
+async def dados_protegidos(user: dict = Depends(verify_token)):
+    print(f"Rota que exige autenticação JWT")
+    return {"message": f"Bem-vindo, {user['sub']}! Aqui estão seus dados secretos."}
+
+@app.get("/version")
+def get_version(user: dict = Depends(verify_token)):
+    return { "VERSION" : "0.0.0"}
