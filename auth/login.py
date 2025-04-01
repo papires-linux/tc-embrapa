@@ -38,7 +38,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     if username == SECRET_USERNAME and password == SECRET_PWD:
         token = create_jwt_token({"sub": username})
         return {"access_token": token, "token_type": "bearer"}
-
     raise HTTPException(status_code=400, detail="Usuário ou senha incorretos")
 
 # Função para verificar o token
@@ -55,7 +54,7 @@ def verify_token(token: str = Depends(oauth2_scheme)):
 # Rota protegida
 @app.get("/dados-protegidos")
 async def dados_protegidos(user: dict = Depends(verify_token)):
-    print(f"Rota que exige autenticação JWT")
+    print("Rota que exige autenticação JWT")
     return {"message": f"Bem-vindo, {user['sub']}! Aqui estão seus dados secretos."}
 
 @app.get("/version")
