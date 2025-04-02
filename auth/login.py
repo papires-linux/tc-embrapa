@@ -2,20 +2,20 @@ import jwt
 import datetime
 import os
 
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 from typing import Optional
 from dotenv import load_dotenv
+
+router = APIRouter()  # Cria um router separado
 
 # Carregar variáveis de ambiente
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY", "chave_secreta")
 SECRET_USERNAME = os.getenv("SECRET_USERNAME", "admin")
 SECRET_PWD = os.getenv("SECRET_PWD", "1234")
-TIME_EXPIRES=30
-
-app = FastAPI()
+TIME_EXPIRES=30 #minutos
 
 # Configuração do OAuth2
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -29,7 +29,7 @@ def create_jwt_token(data: dict, expires_delta: Optional[int] = TIME_EXPIRES):
     return jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
 
 # Rota para gerar o token JWT
-@app.post("/token")
+@router.post("/auth/token")
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     username = form_data.username
     password = form_data.password
@@ -52,11 +52,8 @@ def verify_token(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Token inválido")
 
 # Rota protegida
-@app.get("/dados-protegidos")
+@router.get("/auth/dados-protegidos")
 async def dados_protegidos(user: dict = Depends(verify_token)):
     print("Rota que exige autenticação JWT")
     return {"message": f"Bem-vindo, {user['sub']}! Aqui estão seus dados secretos."}
 
-@app.get("/version")
-def get_version(user: dict = Depends(verify_token)):
-    return { "VERSION" : "0.0.0"}
