@@ -1,0 +1,23 @@
+{
+    "PRODUCAO" :  "http://vitibrasil.cnpuv.embrapa.br/download/Producao.csv",
+    "PROCESSAMENTO" :{
+        "VINNIFERAS" :  "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaViniferas.csv",
+        "AMERICANAS_HIBRIDAS" :  "http://vitibrasil.cnpuv.embrapa.br/download/Comercio.csv",
+        "UVAS_MESA" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaMesa.csv",
+        "SEM_CLASSIFICACAO" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaSemclass.csv"
+    },
+    "COMERCIALIZACAO" :  "http://vitibrasil.cnpuv.embrapa.br/download/Comercio.csv",
+    "IMPORTACAO" :  {
+        "VINHOS_MESA" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpVinhos.csv",
+        "ESPUMANTES" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpEspumantes.csv",
+        "UVAS_FRESCAS" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpFrescas.csv",
+        "UVAS_PASSAS" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpPassas.csv",
+        "SUCO_UVA" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpSuco.csv" 
+    },
+    "EXPORTACAO" : {
+        "VINHOS_MESA" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpVinho.csv",
+        "ESPUMANTES" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpEspumantes.csv",
+        "UVAS_FRESCAS" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpUva.csv",
+        "SUCO_UVA" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpSuco.csv"
+    }
+}

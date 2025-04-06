@@ -1,0 +1,23 @@
+{
+    "PRODUCAO" :  "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02",
+    "PROCESSAMENTO" :{
+        "VINNIFERAS" :          "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_03",
+        "AMERICANAS_HIBRIDAS" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_03",
+        "UVAS_MESA" :           "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_03",
+        "SEM_CLASSIFICACAO" :   "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_03"
+    },
+    "COMERCIALIZACAO" :     "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_04",
+    "IMPORTACAO" :  {
+        "VINHOS_MESA" :     "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_05",
+        "ESPUMANTES" :      "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_05",
+        "UVAS_FRESCAS" :    "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_05",
+        "UVAS_PASSAS" :     "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_05",
+        "SUCO_UVA" :        "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_05&opcao=opt_05"
+    },
+    "EXPORTACAO" : {
+        "VINHOS_MESA" :     "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06",
+        "ESPUMANTES" :      "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_06",
+        "UVAS_FRESCAS" :    "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_06",
+        "SUCO_UVA" :        "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_06"
+    }
+}
