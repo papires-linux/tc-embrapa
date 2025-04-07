@@ -34,7 +34,6 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     username = form_data.username
     password = form_data.password
 
-    print("entrou")
     if username == SECRET_USERNAME and password == SECRET_PWD:
         token = create_jwt_token({"sub": username})
         return {"access_token": token, "token_type": "bearer"}
