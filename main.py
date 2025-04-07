@@ -1,5 +1,7 @@
 import auth.login as auth_login
-from fastapi import FastAPI,Depends
+import api.api_getPortal as getPortal
+
+from fastapi import Depends,FastAPI
 
 app = FastAPI()
 
@@ -17,3 +19,5 @@ def get_version(user: dict = Depends(auth_login.verify_token)):
 #Incluir a route do auth/* # fazer o token.
 app.include_router(auth_login.router)
 
+#Incluir a route do api/* # fazer a captura de dados na web.
+app.include_router(getPortal.router)

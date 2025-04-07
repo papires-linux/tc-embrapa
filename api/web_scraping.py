@@ -1,8 +1,23 @@
 #import pandas as pd
-import requests,json
+import requests
+import json
 from bs4                import BeautifulSoup
 
+
+def lerVariaveis(caminho_arquivo:str) -> dict:    
+    with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
+        dados = json.load(arquivo)
+    return dados
+
 def getDadosWebScraping(url:str,tag_tb_base:str) -> list:
+    status,dados = getDadosWebScraping_web(url,tag_tb_base)
+    if status == 200:
+        return dados
+    else:   
+        return []
+    
+
+def getDadosWebScraping_web(url:str,tag_tb_base:str) -> list:
     # Faz a requisição para o site
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -60,11 +75,9 @@ def getDadosWebScraping(url:str,tag_tb_base:str) -> list:
         print(texto)
         return 404, texto
 
-# URL do site
-#url = "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_03"
-url = "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02"
-#url = "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_03"
+# # URL do site
+# url = "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02"
 
-default_tag_tb_base = "tb_base tb_dados"
-dados = getDadosWebScraping(url,default_tag_tb_base)
-print(dados)
+# default_tag_tb_base = "tb_base tb_dados"
+# dados = getDadosWebScraping(url,default_tag_tb_base)
+# print(dados)
