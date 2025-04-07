@@ -7,18 +7,15 @@
         "VINIFERAS" :  {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaViniferas.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_03"
-        },
-            
+        },            
         "AMERICANAS_HIBRIDAS" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/Comercio.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_03"
-        },
- 
+        }, 
         "UVAS_MESA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaMesa.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_03"
         },
-
         "SEM_CLASSIFICACAO" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaSemclass.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_03"
@@ -33,22 +30,18 @@
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpVinhos.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_05"
         },
-
         "ESPUMANTES" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpEspumantes.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_05"
         },
-
         "UVAS_FRESCAS" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpFrescas.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_05"
         },
-
         "UVAS_PASSAS" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpPassas.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_05"
         },
-
         "SUCO_UVA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpSuco.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_05&opcao=opt_05"
@@ -59,17 +52,14 @@
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpVinho.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06"
         },
-
         "ESPUMANTES" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpEspumantes.csv", 
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_02&opcao=opt_06"
         },
-
         "UVAS_FRESCAS" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpUva.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_03&opcao=opt_06"
         },
-
         "SUCO_UVA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpSuco.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_04&opcao=opt_06"

@@ -16,6 +16,7 @@ def echo(texto):
     logging.info(texto)
     print(texto)
     return texto
+
 # Função para validação do ano
 def validar_ano(ano: int):
     if ANO_MINIMO > ano or ano > ANO_MAXIMO:
@@ -30,7 +31,7 @@ def obter_dados(funcao: str, tipo: str, ano: int = None):
     echo(f"URL para consultar o site: {url}")
     if not url:
         raise HTTPException(status_code=404, detail=f"Tipo de processamento {tipo} não encontrado.")
-    dados = scraping.getDadosWebScraping(url, DEFAULT_TAG_TB_BASE)
+    dados = scraping.getDadosWebScraping(funcao, tipo, ano,DEFAULT_TAG_TB_BASE)
     return dados
 
 # Dependência para autenticação
@@ -48,4 +49,4 @@ async def get_dados_processamento_com_ano(funcao: str,tipo: str, ano: int, user:
     validar_ano(ano)  # Valida o ano
     dados = obter_dados(funcao,tipo, ano)
     return JSONResponse(content={"response": dados})
-    
+
