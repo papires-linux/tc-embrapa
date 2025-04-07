@@ -3,7 +3,7 @@
 #### Executar o código: 
 
 ```
-uvicorn auth.login:app --reload
+uvicorn main:app --reload
 ```
 
 #### Pegar o token:

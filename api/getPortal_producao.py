@@ -1,17 +1,16 @@
 import auth.login as auth_login
-import api.web_scraping as scraping
+import lib.web_scraping as scraping
 
 from fastapi import APIRouter, HTTPException,Depends
 from fastapi.responses import JSONResponse
 
-
 router = APIRouter()  # Cria um router separado
-DEFAULT_TAG_TB_BASE = "tb_base tb_dados"
-
-ANO_MAXIMO = 2024
-ANO_MINIMO = 1970
-
 VAR_WEB_JSON = scraping.lerVariaveis('sources/url_web.json')
+VAR_CONFIG_JSON = scraping.lerVariaveis('sources/config.json')
+
+DEFAULT_TAG_TB_BASE = VAR_CONFIG_JSON["DEFAULT_TAG_TB_BASE"]
+ANO_MAXIMO = VAR_CONFIG_JSON["ANO_MAXIMO"]
+ANO_MINIMO = VAR_CONFIG_JSON["ANO_MINIMO"]
 
 # Rota protegida
 @router.get("/api/producao")
@@ -35,6 +34,3 @@ async def get_dados_producao(ano: int, user: dict = Depends(auth_login.verify_to
     return JSONResponse(
         content={"response": dados }
     )
-
-
-

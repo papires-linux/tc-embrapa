@@ -1,5 +1,5 @@
 import auth.login as auth_login
-import api.api_getPortal as getPortal
+import api.getPortal_producao as getPortal
 
 from fastapi import Depends,FastAPI
 
