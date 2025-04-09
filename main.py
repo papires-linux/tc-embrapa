@@ -1,10 +1,7 @@
-import auth.login as auth_login
-#import api.getPortal_producao as getPortal_producao
-import api.getPortal as getPortal
+import src.auth.login as auth_login
+import src.api.getPortal as getPortal
 
-from fastapi import Depends,FastAPI
-
-app = FastAPI()
+from fastapi import FastAPI
 
 def getVersion() -> str:
     with open('VERSION.txt', 'r') as file:
@@ -13,13 +10,23 @@ def getVersion() -> str:
 
 VERSION_API = getVersion()
 
-@app.get("/version")
-def get_version(user: dict = Depends(auth_login.verify_token)):
-    return { "VERSION" : VERSION_API}
+app = FastAPI(
+    title="API para coletar dados do portal embrapa",
+    description="Esta é uma API para captura dados do portal embrapa e deixar disponivel.",
+    version=VERSION_API,
+    docs_url="/docs", 
+    redoc_url="/redoc"  
+)
+
+@app.get("/health")
+def get_version():
+    return { 
+        "VERSION" : VERSION_API,
+        "STATUS" : "OK"
+    }
 
 #Incluir a route do auth/* # fazer o token.
 app.include_router(auth_login.router)
 
 #Incluir a route do api/* # fazer a captura de dados na web.
-#app.include_router(getPortal_producao.router)
 app.include_router(getPortal.router)
