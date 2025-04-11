@@ -1,0 +1,143 @@
+import requests
+import json
+import ast
+import pandas as pd
+import logging 
+from datetime import date
+from bs4                import BeautifulSoup
+
+def echo(texto):
+    logging.info(texto)
+    print(texto)
+    return texto
+
+def lerVariaveis(caminho_arquivo:str) -> dict:    
+    with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
+        dados = json.load(arquivo)
+    return dados
+
+CONFIG_DADOS_JSON = lerVariaveis('config/db_site.json')
+CONFIG_JSON = lerVariaveis('config/config.json')
+
+def getDadosWebScraping(url: str, funcao: str, tipo: str, ano: int = None, tag_tb_base:str = None) -> list:
+    status,dados = None,None
+    try:
+        status,dados = getDadosWebScraping_web(url, ano,tag_tb_base)  
+        if status == 200:
+            echo("Captura de dados via web")
+            return 200, dados
+        else:
+            echo("Captura de dados via csv")
+            status_dados, dados = getDados_csv(funcao, tipo, ano)
+            return status_dados, dados
+    except:
+        print(f"{status} |||  {dados}")
+        # return  501, f"Dados não processados."
+        return  status, dados
+
+# Incluir o ano de pesquisa
+def incluir_ano(url: str, ano: int) -> str:
+    return f"{url.split('?')[0]}?ano={str(ano)}&{url.split("?")[1]}"
+
+def get_schema(schema_raw:str, ano:int) -> list:
+    schema_modificado = schema_raw.replace('{ano}',str(ano))
+    return ast.literal_eval(schema_modificado)
+
+def dict_renomear_colunas(chave, valor:str):
+    key = chave
+    value = ast.literal_eval(valor)
+    return dict(zip(key, value))
+
+def getDadosWebScraping_web(url:str, ano: int = None,tag_tb_base:str='') -> list:
+    try: 
+        if ano is not None:
+            url = incluir_ano(url, ano)
+
+        echo(f"URL para consultar o site: {url}")
+
+        # Faz a requisição para o site
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        response = requests.get(url, headers=headers)
+
+        # Verifica se a requisição foi bem-sucedida
+        if response.status_code == 200:
+            # Cria o objeto BeautifulSoup
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Encontra a tabela no HTML
+            # Como o site pode ter várias tabelas, podemos precisar ajustar o seletor
+            tabela = soup.find('table', class_=tag_tb_base)
+            
+            # Se não encontrar com a classe 'tabela', tenta encontrar qualquer tabela
+            if not tabela:
+                tabela = soup.find('table')
+            
+            # Se encontrou a tabela
+            if tabela:
+                # Lista para armazenar os dados
+                dados = []
+                
+                # Encontra todas as linhas da tabela
+                linhas = tabela.find_all('tr')
+                
+                
+                # Extrai os cabeçalhos
+                cabecalhos = []
+                for celula in linhas[0].find_all(['th', 'td']):
+                    cabecalhos.append(celula.get_text(strip=True))
+                
+                # Extrai os dados das linhas
+                for linha in linhas[1:]:
+                    colunas = linha.find_all(['td', 'th'])
+                    if len(colunas) > 0:
+                        linha_dados = {}
+                        for i, celula in enumerate(colunas):
+                            if i < len(cabecalhos):  
+                                valor = celula.get_text(strip=True)
+                                if valor == "-": 
+                                    valor = "0"
+                                linha_dados[cabecalhos[i]] = valor.replace(".","")
+                        dados.append(linha_dados)
+                return 200, dados
+            else:
+                texto = "Não foi possível encontrar a tabela no site."
+                print(texto)
+                return 404, texto
+        else:
+            texto = f"Falha ao acessar o site. Status code: {response.status_code}"
+            print(texto)
+            return 404, texto
+    except:
+        return 404, f"Dados não processados."
+
+def getDados_csv(funcao: str, tipo: str, ano: int = None) -> list:
+    url_csv = CONFIG_DADOS_JSON[funcao.upper()].get(tipo.upper()).get("CSV")
+    echo(f"url : {url_csv}")
+    
+    try:
+        response = requests.get(url_csv)
+        response.raise_for_status()  # Verifica se a requisição foi bem-sucedida (status code 200)
+        echo("CSV está disponível. Carregando dados...")
+        
+        delimitador = CONFIG_DADOS_JSON[funcao.upper()].get("DELIMITADOR")
+        
+        df = pd.read_csv(url_csv, sep=delimitador)
+        config_schema_raw = CONFIG_DADOS_JSON[funcao.upper()].get("SCHEMA_RAW")
+        config_schema_rename = CONFIG_DADOS_JSON[funcao.upper()].get("SCHEMA_RENAME")
+
+        col_ano_index = get_schema(config_schema_raw,ano)
+
+        df_tratado = df[col_ano_index]
+        df_tratado = df_tratado.rename(columns=dict_renomear_colunas(col_ano_index,config_schema_rename))
+
+        # Converter o DataFrame para JSON
+        json_data = df_tratado.to_json(orient='records', force_ascii=False)
+        echo(f"Qtdds de dados: {len(json_data)}")
+        data_list = json.loads(json_data)
+        return 200, data_list
+
+    except requests.exceptions.RequestException as e:
+        echo(f"Erro ao acessar o CSV: {e}")
+        return -1, f"Erro ao acessar o CSV: {e}"
