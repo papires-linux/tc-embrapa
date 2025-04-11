@@ -1,5 +1,3 @@
 {
-    "DEFAULT_TAG_TB_BASE" : "tb_base tb_dados",
-    "ANO_MINIMO" : 1970,
-    "ANO_MAXIMO" : 2024
+    "DEFAULT_TAG_TB_BASE" : "tb_base tb_dados"
 }

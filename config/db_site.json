@@ -4,6 +4,10 @@
         "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02"
     },
     "PROCESSAMENTO" :{
+        "SCHEMA_RAW" : "['cultivar','{ano}']",
+        "SCHEMA_RENAME" : "['Cultivar','Quantidade (Kg)']",
+        "DELIMITADOR" : "\t",
+
         "VINIFERAS" :  {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ProcessaViniferas.csv",
             "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_03"
@@ -26,9 +30,13 @@
         "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_04"
     },
     "IMPORTACAO" :  {
+        "SCHEMA_RAW" : "['País','{ano}','{ano}.1']",
+        "SCHEMA_RENAME" : "['País','Quantidade (Kg)','Valor (US$)']",
+        "DELIMITADOR" : "\t",
+        
         "VINHOS_MESA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpVinhos.csv",
-            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_05"
+            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_05ccc"
         },
         "ESPUMANTES" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ImpEspumantes.csv",
@@ -48,9 +56,13 @@
         }
     },
     "EXPORTACAO" : {
+        "SCHEMA_RAW" : "['País','{ano}','{ano}.1']",
+        "SCHEMA_RENAME" : "['País','Quantidade (Kg)','Valor (US$)']",
+        "DELIMITADOR" : "\t",
+        
         "VINHOS_MESA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpVinho.csv",
-            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06"
+            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06 xxxx"
         },
         "ESPUMANTES" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpEspumantes.csv", 
