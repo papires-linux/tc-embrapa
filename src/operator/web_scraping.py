@@ -96,7 +96,10 @@ def get_dados_web_scraping_web(
             colunas = linha.find_all(['td', 'th'])
             if colunas:
                 linha_dados = {
-                    cabecalhos[i]: cell.get_text(strip=True).replace('.', '').replace('-', '0')
+                    if i == 0 :
+                        cabecalhos[i]: cell.get_text(strip=True).replace('.', '').replace('-', '0')
+                    else: 
+                        cabecalhos[i]: cell.get_text(strip=True).replace('.', '').replace('-', '0').replace(',', '.')   
                     for i, cell in enumerate(colunas) if i < len(cabecalhos)
                 }
                 dados.append(linha_dados)

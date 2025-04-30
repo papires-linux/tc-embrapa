@@ -5,7 +5,7 @@ from fastapi import APIRouter, HTTPException, Depends, Query
 from fastapi.responses import JSONResponse
 
 from src.auth import login as auth_login
-from src.lib import operator_enum, web_scraping as scraping
+from src.operator import operator_enum, web_scraping as scraping
 
 # Configuração de logging
 logger = logging.getLogger(__name__)
@@ -23,10 +23,10 @@ DEFAULT_TAG_TB_BASE = CONFIG_JSON["DEFAULT_TAG_TB_BASE"]
 def verificar_autenticacao(user: dict = Depends(auth_login.verify_token)) -> dict:
     return user
 
-
 def obter_dados(
     funcao: operator_enum.FuncaoEnum,
-    tipo: Optional[str] = None,
+    #tipo: Optional[str] = None,
+    tipo: operator_enum.TipoEnum,
     ano: Optional[int] = None
 ) -> Any:
     """Busca os dados do scraping conforme função, tipo e ano"""
@@ -53,7 +53,6 @@ def obter_dados(
     except KeyError as e:
         raise HTTPException(status_code=400, detail=f"Erro de configuração: {e}")
 
-
 @router.get("/api/{funcao}")
 async def get_dados_funcao(
     funcao: operator_enum.FuncaoEnum,
@@ -66,7 +65,8 @@ async def get_dados_funcao(
 @router.get("/api/{funcao}/{tipo}")
 async def get_dados_processamento(
     funcao: operator_enum.FuncaoEnum,
-    tipo: str,
+    #tipo: str,
+    tipo: operator_enum.TipoEnum,
     ano: int = Query(..., description="Ano dos dados a serem consultados"),
     user: dict = Depends(verificar_autenticacao)
 ) -> JSONResponse:

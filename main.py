@@ -12,16 +12,16 @@ VERSION_API = getVersion()
 
 app = FastAPI(
     title="API para coletar dados do portal embrapa",
-    description="Esta é uma API para captura dados do portal embrapa e deixar disponivel.",
+    description="Esta é uma API para captura dados do portal embrapa e retorna na api como json.",
     version=VERSION_API,
     docs_url="/docs", 
-    redoc_url="/redoc"  
+    redoc_url="/redoc"
 )
 
 @app.get("/health")
 def get_version():
-    return { 
-        "VERSION" : VERSION_API,
+    return {
+        "VERSAO" : VERSION_API,
         "STATUS" : "OK"
     }
 
