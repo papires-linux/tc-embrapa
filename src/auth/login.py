@@ -24,7 +24,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 def create_jwt_token(data: dict, expires_delta: Optional[int] = TIME_EXPIRES):
     print(f"Cria um token JWT válido por {TIME_EXPIRES} minutos")
     to_encode = data.copy()
-    expire = datetime.datetime.utcnow() + datetime.timedelta(minutes=expires_delta)
+    expire = datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=expires_delta)
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
 
@@ -49,10 +49,3 @@ def verify_token(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401, detail="Token expirado")
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Token inválido")
-
-# Rota protegida
-@router.get("/auth/dados-protegidos")
-async def dados_protegidos(user: dict = Depends(verify_token)):
-    print("Rota que exige autenticação JWT")
-    return {"message": f"Bem-vindo, {user['sub']}! Aqui estão seus dados secretos."}
-
