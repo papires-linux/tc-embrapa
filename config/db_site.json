@@ -1,4 +1,7 @@
 {
+    "URL_BASE":{
+        "WEB" : "http://vitibrasil.cnpuv.embrapa.br"
+    },
     "PRODUCAO" :  {
         "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/Producao.csv",
         "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?opcao=opt_02"
@@ -62,7 +65,7 @@
         
         "VINHOS_MESA" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpVinho.csv",
-            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06 xxxx"
+            "WEB" : "http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao=subopt_01&opcao=opt_06"
         },
         "ESPUMANTES" : {
             "CSV" : "http://vitibrasil.cnpuv.embrapa.br/download/ExpEspumantes.csv", 
