@@ -40,7 +40,7 @@ tc-embrapa/
 
 Essa organização promove uma separação clara de responsabilidades, facilitando a manutenção e escalabilidade da aplicação.
 
-
+#### Fazendo primeira requisição
 ```mermaid
 sequenceDiagram
     actor User
@@ -52,6 +52,8 @@ sequenceDiagram
     API (service) ->>+ API (service): Faz o web scraping ou consulta o csv do site para retornar os dados.
     API (service) -->>-User: Retorna os dados processados do site.
 ```
+
+#### Fazendo segunda requisição
 ```mermaid
 sequenceDiagram
     actor User
