@@ -7,7 +7,7 @@ from fastapi import APIRouter, HTTPException, Depends, Query
 from fastapi.responses import JSONResponse
 
 from src.auth import login as auth_login
-from src.operator import web_scraping as scraping
+from src.services import web_scraping as scraping
 
 # Configuração de logging
 logger = logging.getLogger(__name__)
