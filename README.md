@@ -1,5 +1,5 @@
 
-# 📌 Tarefas API – Simulador de CRUD com Web Scraping
+# 📌 API REST EMBRAPA VITIBrasil 
 
 API REST desenvolvida com **FastAPI** que realiza web scraping de dados públicos do site [Embrapa VitiBrasil](http://vitibrasil.cnpuv.embrapa.br).  
 Inclui endpoints de autenticação e operações CRUD simuladas sobre tarefas e dados coletados.
@@ -13,13 +13,6 @@ Inclui endpoints de autenticação e operações CRUD simuladas sobre tarefas e 
 
 A aplicação segue uma arquitetura modular e limpa, utilizando o framework **FastAPI** para construção de APIs RESTful.
 
-### 🔧 Componentes Principais
-
-- **FastAPI**: Framework principal para criação de APIs rápidas e eficientes.
-- **Uvicorn**: Servidor ASGI utilizado para executar a aplicação.
-- **BeautifulSoup**: Biblioteca utilizada para realizar o web scraping dos dados públicos do site da Embrapa VitiBrasil.
-- **Pydantic**: Utilizado para validação e serialização dos dados.
-- **Autenticação JWT**: Implementada para proteger os endpoints da API.
 
 ### 📁 Estrutura de Diretórios
 
@@ -40,6 +33,7 @@ tc-embrapa/
 
 Essa organização promove uma separação clara de responsabilidades, facilitando a manutenção e escalabilidade da aplicação.
 
+### Diagramas
 #### Fazendo primeira requisição
 ```mermaid
 sequenceDiagram
@@ -97,7 +91,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Acesse a API em: [http://localhost:8000/docs](http://localhost:8000/docs)
+Validar se a API está ativa: [http://localhost:8000/health](http://localhost:8000/health)
 
 ### 4. Executar com Docker
 
@@ -120,11 +114,6 @@ docker run -d -p 8000:8000 tc-embrapa-api
 - **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)  
 - **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
-### Teste de saúde da API
-
-```bash
-curl http://localhost:8000/health
-```
 
 ### Autenticação
 
@@ -186,6 +175,14 @@ curl 'http://127.0.0.1:8000/api/processamento/viniferas?ano=2020' \
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 - [Docker](https://www.docker.com/)
 - [Python 3.10+](https://www.python.org/)
+
+### 🔧 Componentes Principais
+
+- **FastAPI**: Framework principal para criação de APIs rápidas e eficientes.
+- **Uvicorn**: Servidor ASGI utilizado para executar a aplicação.
+- **BeautifulSoup**: Biblioteca utilizada para realizar o web scraping dos dados públicos do site da Embrapa VitiBrasil.
+- **Pydantic**: Utilizado para validação e serialização dos dados.
+- **Autenticação JWT**: Implementada para proteger os endpoints da API.
 
 ---
 
