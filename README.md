@@ -44,8 +44,24 @@ Essa organização promove uma separação clara de responsabilidades, facilitan
 ```mermaid
 sequenceDiagram
     actor User
-    User->>main.py: /auth/token
-    main.py->>rota: fazer o login
+    participant Login
+    User->>+Login: Solicitar Token para /auth/token
+    Login-->>-User: Devolve Token
+    User ->>+API (getPortal): Solicitar dados com somente o nome da função e o ano para /api/{funcao}?ano={ano}
+    API (getPortal) ->>+ API (service): Faz a requisição dos dados para o site Embrapa VitiBrasil.
+    API (service) ->>+ API (service): Faz o web scraping ou consulta o csv do site para retornar os dados.
+    API (service) -->>-User: Retorna os dados processados do site.
+```
+```mermaid
+sequenceDiagram
+    actor User
+    participant Login
+    User->>+Login: Solicitar Token para /auth/token
+    Login-->>-User: Devolve Token
+    User ->>+API (getPortal): Solicitar dados com somente o nome da função e o ano para /api/{funcao}/tipo?ano={ano}
+    API (getPortal) ->>+ API (service): Faz a requisição dos dados para o site Embrapa VitiBrasil.
+    API (service) ->>+ API (service): Faz o web scraping ou consulta o csv do site para retornar os dados.
+    API (service) -->>-User: Retorna os dados processados do site.
 ```
 
 
