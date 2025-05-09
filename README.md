@@ -184,6 +184,14 @@ curl 'http://127.0.0.1:8000/api/processamento/viniferas?ano=2020' \
 - **Pydantic**: Utilizado para validação e serialização dos dados.
 - **Autenticação JWT**: Implementada para proteger os endpoints da API.
 
+## 🧪 Link público do deploy da API
+Temporariamente, estarei deixando disponivel o seguinte link para o teste da API:
+**https://tc-embrapa-api-87532379282.us-central1.run.app/**
+
+Pode fazer o teste do api com esse link [Check Status](https://tc-embrapa-api-87532379282.us-central1.run.app/health).
+
+
+
 ---
 
 ## 👨‍💻 Autor
