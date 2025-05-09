@@ -2,14 +2,20 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt ./
+COPY ./src/ /app/src/
+COPY ./config/ /app/config/
+COPY requirements.txt /app
+COPY main.py /app
+COPY VERSION.txt /app
+
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+EXPOSE 8080
 
-# Expor a porta da aplicação
-EXPOSE 8000
+CMD ["/usr/local/bin/uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+### ENTRYPOINT [ "uvicorn", "main:app" ]
 
-# Comando para rodar a API
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+
