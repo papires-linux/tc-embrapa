@@ -191,6 +191,27 @@ Temporariamente, estarei deixando disponivel o seguinte link para o teste da API
 Pode fazer o teste do api com esse link [Check Status](https://tc-embrapa-api-87532379282.us-central1.run.app/health).
 
 
+## Itens de entrega
+Abaixo, está o link de todos os entregáveis obrigatórios.
+Também, estou anexando o projeto que está no git para registro da entrega. 
+
+
+Entregáveis obrigatórios
+1. Repositório GitHub
+• Código organizado em módulos, com README detalhado (descrição do projeto, instruções de instalação, execução e testes).
+Link: https://github.com/papires-linux/tc-embrapa
+
+2. Link público do deploy da API
+• Heroku, Vercel, Render, Fly.io ou qualquer plataforma similar — desde que permita o acesso para testes externos.
+Link: https://tc-embrapa-api-87532379282.us-central1.run.app
+
+3. Diagrama/Imagem da Arquitetura
+• Fluxograma de alto nível que mostre: raspagem → API → (fallback para arquivo local, se aplicável).
+Link: [diagramas](#diagramas)
+
+4. Vídeo de apresentação (3 – 12 min)
+• Demonstre a arquitetura, execute chamadas reais à API e comente boas práticas utilizadas. 
+[Video](/.readme/video_demo.mov)
 
 ---
 
